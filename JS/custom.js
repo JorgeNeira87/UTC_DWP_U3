@@ -5,20 +5,26 @@ $(document).ready(function () {
   menu("Ingreso");
 
   // Cargar el contenido HTML de un archivo externo
-  modulo("Principal");
+  loadModule();
 
 });
 
-function modulo(modulo) {
-  $('#contenido').load('./Modulos/' + modulo + '.html', function () {
-    if (modulo == "Menu") {
-      var carrusel = document.getElementsByClassName("slider_section");
-      $(carrusel).addClass("d-none");
-    } else if (modulo == "Principal") {
-      var carrusel = document.getElementsByClassName("slider_section");
-      $(carrusel).removeClass("d-none");
-    }
-  });
+function loadModule() {
+  var urlActual = window.location.href;
+  var parametros = new URLSearchParams(new URL(urlActual).search);
+  var valor = parametros.get('pagina');
+  var modulo = "./Modulos/" + valor + ".html";
+
+  if (valor != "Principal") {
+    var carrusel = document.getElementsByClassName("slider_section");
+    $(carrusel).addClass("d-none");
+  } else {
+    var carrusel = document.getElementsByClassName("slider_section");
+    $(carrusel).removeClass("d-none");
+  }
+
+  const moduleLoader = new ModuleLoader('contenido');
+  moduleLoader.loadModule(modulo);
 }
 
 // to get current year
@@ -68,4 +74,23 @@ function selectPaymentMethod(method) {
 function lamagiadelmodal(){
   var paymentForm = document.getElementById("paymentForm");
   paymentForm.innerHTML="";
+}
+
+class ModuleLoader {
+  constructor(containerId) {
+    this.container = $('#' + containerId);
+  }
+
+  loadModule(modulePath) {
+    $.ajax({
+      url: modulePath,
+      dataType: 'html',
+      success: (data) => {
+        this.container.html(data);
+      },
+      error: (xhr, status, error) => {
+        console.error(`Error loading module: ${modulePath}. Status: ${status}. Error: ${error}`);
+      }
+    });
+  }
 }
