@@ -9,7 +9,7 @@
     </div>
     <div class="mb-3">
         <label for="telefono" class="form-label">Telefono:</label>
-        <input type="text" name="telefono" id="telefono" class="form-control" placeholder="Ingresa tu contraseña">
+        <input type="text" name="telefono" id="telefono" class="form-control" placeholder="Ingresa tu numero telefonico">
     </div>
     <div class="mb-3">
         <label class="form-label w-100">Genero:</label>
@@ -24,8 +24,7 @@
     </div>
     <div class="mb-3">
         <label for="contrasena" class="form-label">Contraseña:</label>
-        <input type="password" name="contrasena" id="contrasena" class="form-control"
-            placeholder="Ingresa tu contraseña">
+        <input type="password" name="contrasena" id="contrasena" class="form-control" placeholder="Ingresa tu contraseña" min="6" max="20">
         <span id="passwordHelpInline" class="form-text">
             Contraseña de almenos 6-20 caracteres
         </span>
@@ -34,3 +33,4 @@
     <input class="btn btn-outline-primary" type="reset" value="Reset">
 </form>
 <a class="link-danger link-underline-danger" onclick="menu('Ingreso')">Ingresar</a>
+<script src="./JS/validacionFormulario.js"></script>
