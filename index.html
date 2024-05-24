@@ -54,9 +54,21 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <!-- Tabs -->
             <ul class="navbar-nav mx-auto">
-              <!-- <li class="nav-item"><a class="nav-link" onclick="modulo('Principal')">Principal</a></li> -->
-              <li class="nav-item"><a class="nav-link" href="?pagina=Principal">Principal</a></li>
+              <!-- <li class="nav-item"><a class="nav-link" role="button" onclick="modulo ('Principal')">Principal</a></li> -->
+              <li class="nav-item"><a class="nav-link" role="button" href="?pagina=Principal">Principal</a></li>
               <li class="nav-item"><a class="nav-link" href="?pagina=Menu">Menu</a></li>
+              <li class="nav-item"><a class="nav-link" role="button" onclick="modulo('Pedidos')">Pedidos</a></li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+                  aria-expanded="false">
+                  Más
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <li><a class="dropdown-item" onclick="modulo('Conocenos')">Conócenos</a></li>
+                  <li><a class="dropdown-item" onclick="modulo('Ayuda')">Ayuda</a></li>
+                  <li><a class="dropdown-item" onclick="modulo('Contactanos')">Contáctanos</a></li>
+                </ul>
+              </li>
             </ul>
             <!-- Opciones -->
             <div class="user_option">
@@ -69,7 +81,8 @@
 
                 </ul>
               </div>
-              <button type="button" class="order_online" data-bs-toggle="modal" data-bs-target="#paymentModal" onclick="lamagiadelmodal()">Ordena online</button>
+              <button type="button" class="order_online" data-bs-toggle="modal" data-bs-target="#paymentModal"
+                onclick="lamagiadelmodal()">Ordena online</button>
             </div>
 
           </div>
@@ -215,10 +228,12 @@
           <h5 class="modal-title" id="paymentModalLabel">Seleccionar Método de Pago</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div class="modal-body"> 
+        <div class="modal-body">
           <div class="btn-group-vertical w-100" role="group">
-            <button type="button" class="btn btn-outline-success text-black" onclick="selectPaymentMethod('paypal')">PayPal</button> <br>
-            <button type="button" class="btn btn-outline-success text-black" onclick="selectPaymentMethod('credit_card')">Tarjeta de Crédito</button>
+            <button type="button" class="btn btn-outline-success text-black"
+              onclick="selectPaymentMethod('paypal')">PayPal</button> <br>
+            <button type="button" class="btn btn-outline-success text-black"
+              onclick="selectPaymentMethod('credit_card')">Tarjeta de Crédito</button>
           </div>
           <div id="paymentForm"></div>
         </div>
@@ -226,7 +241,7 @@
     </div>
   </div>
   <!-- Modal de orden -->
-  
+
   <!-- Modal de producto -->
   <div class="modal fade" id="moproducto" tabindex="-1" aria-labelledby="productoModalLabel" aria-hidden="true">
     <div class="modal-dialog">
