@@ -1,8 +1,14 @@
-// Formato de campo de Numero Telefonico
+var registro = document.getElementById("registerForm");
+var usuarioInput = document.getElementById("usuario");
+var correoInput = document.getElementById("correo");
 var telefonoInput = document.getElementById("telefono");
+var hombreInput = document.getElementById("generoHombre");
+var mujerInput = document.getElementById("generoMujer");
+var contrasenaInput = document.getElementById("contrasena");
 
+// Formato de campo de Numero Telefonico
 telefonoInput.addEventListener("input", function () {
-    var valor = this.value.replace(/\D/g, ''); // Eliminar caracteres que no sean dígitos
+    var valor = this.value.replace(/\D/g, '');
 
     var numeroFormateado = '';
     if (valor.length > 0) {
@@ -19,8 +25,6 @@ telefonoInput.addEventListener("input", function () {
 });
 
 // Formato de campo de Correo Electronico
-var correoInput = document.getElementById("correo");
-
 correoInput.addEventListener("input", function () {
     var valor = this.value.replace(/[^\w\.\-@]/g, '');
 
@@ -30,7 +34,6 @@ correoInput.addEventListener("input", function () {
 });
 
 // Formato de campo de Contraseña
-var contrasenaInput = document.getElementById("contrasena");
 contrasenaInput.addEventListener("input", function () {
     var valor = this.value;
 
@@ -43,4 +46,58 @@ contrasenaInput.addEventListener("input", function () {
     }
 
     this.value = valor;
+});
+
+registro.addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    if (usuarioInput.value === "") {
+        Swal.fire({
+            position: "top-end",
+            title: "Ingrese un usuario valido, por favor.",
+            color: "#ffffff",
+            background: "#ffbe32",
+            showConfirmButton: false,
+            timer: 1500
+        });
+    } else if (correoInput.value === "") {
+        Swal.fire({
+            position: "top-end",
+            title: "Ingrese un correo electronico, por favor.",
+            color: "#ffffff",
+            background: "#ffbe32",
+            showConfirmButton: false,
+            timer: 1500
+        });
+    } else if (telefonoInput.value === "" || telefonoInput.length > 10) {
+        Swal.fire({
+            position: "top-end",
+            title: "Ingrese un numero telefonico valido, por favor.",
+            color: "#ffffff",
+            background: "#ffbe32",
+            showConfirmButton: false,
+            timer: 1500
+        });
+    } else if (!hombreInput.checked && !mujerInput.checked) {
+        Swal.fire({
+            position: "top-end",
+            title: "Selecciones un genero, por favor.",
+            color: "#ffffff",
+            background: "#ffbe32",
+            showConfirmButton: false,
+            timer: 1500
+        });
+    } else if (contrasenaInput.value === "") {
+        Swal.fire({
+            position: "top-end",
+            title: "Ingrese una contraseña, por favor.",
+            color: "#ffffff",
+            background: "#ffbe32",
+            showConfirmButton: false,
+            timer: 1500
+        });
+    } else {
+        menu('Ingreso')
+    }
+
 });
