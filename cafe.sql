@@ -116,8 +116,21 @@ CREATE TABLE `relacionalpedido` (
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `sugerencias`
+--
+
+CREATE TABLE `sugerencias` (
+  `SugerenciaId` int(11) NOT NULL,
+  `Sugerencia` text NOT NULL,
+  `Hora` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `usuarios`
 --
+DROP TABLE IF EXISTS `usuarios`;
 
 CREATE TABLE `usuarios` (
   `UsuarioId` int(11) NOT NULL,
