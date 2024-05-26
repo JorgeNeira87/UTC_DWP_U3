@@ -2,8 +2,8 @@
 require_once 'Conexion.php';
 session_start();
 
-$usuario = $_POST['username'];
-$contrasena = $_POST['password'];
+$usuario = $_POST['usuario'];
+$contrasena = $_POST['contrasena'];
 
 try {
     $ingreso = $conexion->prepare("SELECT UsuarioId, Nombre, Foto, Correo, Telefono, Genero, Contrasena FROM usuarios WHERE Nombre = :usuario AND Contrasena = :contrasena");

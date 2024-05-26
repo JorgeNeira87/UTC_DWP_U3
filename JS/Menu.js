@@ -1,3 +1,6 @@
+let url = new URL(window.location.href);
+url.searchParams.set('pagina', 'Error');
+
 $('.pantalla-carga').fadeIn();
 var productos = new Array();
 Promise.all([obtenerProductos()])
@@ -40,6 +43,7 @@ async function obtenerProductos() {
         return response;
         
     } catch (error) {
+        window.location.href = url.toString();
 
         console.error('Error en la solicitud:', error);
         throw error;
@@ -108,6 +112,8 @@ function cargarProductos(arrayProductos) {
         menu.appendChild(div);
 
     } catch (error) {
+        window.location.href = url.toString();
+
         console.error('Error en la solicitud:', error);
         throw error;
     }

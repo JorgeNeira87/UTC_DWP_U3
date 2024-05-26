@@ -1,10 +1,10 @@
 <?php
 require_once 'Conexion.php';
 
-$usuario = $_POST['username'];
+$usuario = $_POST['usuario'];
 $correo = $_POST['correo'];
 $telefono = $_POST['telefono'];
-$genero = $_POST['inlineRadioOptions'];
+$genero = $_POST['genero'];
 $contrasena = $_POST['contrasena'];
 
 try {

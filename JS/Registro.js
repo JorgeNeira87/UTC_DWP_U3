@@ -5,6 +5,8 @@ var telefonoInput = document.getElementById("telefono");
 var hombreInput = document.getElementById("generoHombre");
 var mujerInput = document.getElementById("generoMujer");
 var contrasenaInput = document.getElementById("contrasena");
+let genero = "";
+
 
 // Formato de campo de Numero Telefonico
 telefonoInput.addEventListener("input", function () {
@@ -36,10 +38,6 @@ correoInput.addEventListener("input", function () {
 // Formato de campo de Contraseña
 contrasenaInput.addEventListener("input", function () {
     var valor = this.value;
-
-    if (valor.length < 6) {
-        return;
-    }
 
     if (valor.length > 20) {
         valor = valor.substring(0, 20);
@@ -96,8 +94,49 @@ registro.addEventListener('submit', function(e) {
             showConfirmButton: false,
             timer: 1500
         });
+    } else if (contrasenaInput.value.length < 6) {
+        Swal.fire({
+            position: "top-end",
+            title: "La contraseña debera ser mayor a 6 caracteres.",
+            color: "#ffffff",
+            background: "#ffbe32",
+            showConfirmButton: false,
+            timer: 1500
+        });
     } else {
-        menu('Ingreso')
+        if (hombreInput.checked) {
+            genero = "Hombre";
+        } else {
+            genero = "Mujer";
+        }
+        $.ajax({
+            url: './PHP/Registro.php',
+            type: 'POST',
+            data: {
+                usuario: usuarioInput.value,
+                correo: correoInput.value,
+                telefono: telefonoInput.value,
+                genero: genero,
+                contrasena: contrasenaInput.value
+            },
+            success: function(response) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Registro exitoso',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+                menu('Ingreso')
+            },
+            error: function(xhr, status, error) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error en el registro',
+                    text: 'Por favor, intenta nuevamente.',
+                    showConfirmButton: true
+                });
+            }
+        });
     }
 
 });

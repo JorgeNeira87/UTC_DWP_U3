@@ -6,6 +6,7 @@ $(document).ready(function () {
 
   // Cargar el contenido HTML de un archivo externo
   loadModule();
+  getYear();
 
 });
 
@@ -34,28 +35,8 @@ function getYear() {
   document.querySelector("#displayYear").innerHTML = currentYear;
 }
 
-getYear();
-
 function menu(modulo) {
   $('#usuarioMenu').load('./Modulos/' + modulo + '.html', function () {
-  });
-}
-
-function ingreso() {
-  $.ajax({
-    url: 'archivo_destino.php',
-    type: 'POST',
-    contentType: 'application/json',
-    data: JSON.stringify({
-      clave1: 'valor1',
-      clave2: 'valor2'
-    }),
-    success: function (response) {
-      console.log('Respuesta del servidor:', response);
-    },
-    error: function (xhr, status, error) {
-      console.error('Error en la solicitud:', error);
-    }
   });
 }
 
@@ -74,6 +55,20 @@ function selectPaymentMethod(method) {
 function lamagiadelmodal(){
   var paymentForm = document.getElementById("paymentForm");
   paymentForm.innerHTML="";
+}
+
+function clearForms(form) {
+  var inputs = form.querySelectorAll("input[type='text'], input[type='password'], input[type='email'], input[type='number']");
+  inputs.forEach(input => input.value = '');
+
+  var checkboxesAndRadios = form.querySelectorAll("input[type='checkbox'], input[type='radio']");
+  checkboxesAndRadios.forEach(input => input.checked = false);
+
+  var textareas = form.querySelectorAll("textarea");
+  textareas.forEach(textarea => textarea.value = '');
+
+  var selects = form.querySelectorAll("select");
+  selects.forEach(select => select.selectedIndex = 0);
 }
 
 class ModuleLoader {
