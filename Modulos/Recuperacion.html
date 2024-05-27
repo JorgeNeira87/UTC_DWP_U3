@@ -1,13 +1,11 @@
-<body>
 <h2>Recuperar Contraseña</h2>
-<form action="./PHP/recuperar_contraseña.php" method="post">
-  <label for="correo">Correo electrónico:</label><br>
-  <input placeholder="Correo" type="email" id="correo" name="correo" required><br><br>
-  
-  <input type="submit" class="btn btn-outline-success" value="Enviar enlace de recuperación">
+<form method="post" id="recuperacionForm" class="mb-2">
+  <div class="mb-3">
+    <label for="correo">Correo electrónico:</label><br>
+    <input class="form-label mb-2" placeholder="Correo" type="email" id="correo" name="correo" required>
+  </div>
+  <button type="submit" class="btn btn-outline-success">Mandar</button>
   <a class="link-danger link-underline-danger" type="button" onclick="menu('Registro')">Registrarse</a>
-
 </form>
 
-</body>
-</html>
+<script src="./JS/Recuperacion.js"></script>

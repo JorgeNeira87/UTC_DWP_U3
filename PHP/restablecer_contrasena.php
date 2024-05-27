@@ -3,7 +3,7 @@ require 'conexion.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $token = $_POST['token'];
-    $nueva_contraseña = $_POST['nueva_contraseña'];
+    $nueva_contraseña = $_POST['contrasena'];
     
     $sql = "SELECT * FROM usuarios WHERE token_recuperacion = :token AND token_expiracion > NOW()";
     $stmt = $conexion->prepare($sql);  // Cambiado de $conn a $conexion
@@ -32,26 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 } else if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['token'])) {
     $token = $_GET['token'];
     ?>
-    <!DOCTYPE html>
-    <html lang="es">
-    <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Restablecer Contraseña</title>
-    </head>
-    <body>
-    
-    <h2>Restablecer Contraseña</h2>
-    <form action="restablecer_contraseña.php" method="post">
-      <input type="hidden" name="token" value="<?php echo htmlspecialchars($token); ?>">
-      <label for="nueva_contraseña">Nueva Contraseña:</label><br>
-      <input type="password" id="nueva_contraseña" name="nueva_contraseña" required><br><br>
-      
-      <input type="submit" value="Restablecer Contraseña">
-    </form>
-    
-    </body>
-    </html>
+
     <?php
 }
 ?>
