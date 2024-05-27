@@ -4,6 +4,7 @@ restablecer.addEventListener('submit', function (e) {
     e.preventDefault();
 
     var urlActual = window.location.href;
+    var url = new URL(urlActual);
     var parametros = new URLSearchParams(new URL(urlActual).search);
     var valor = parametros.get('token');
 
@@ -27,16 +28,14 @@ restablecer.addEventListener('submit', function (e) {
             success: function (response) {
                 parametros.set('pagina', 'Principal');
                 parametros.delete('token');
-                console.log(parametros.toString())
-                urlActual.search = parametros.toString();
-                console.log(urlActual.toString())
-               // window.location.href = urlActual.toString();
+                url.search = parametros.toString();
+                window.location.href = url.toString();
             },
             error: function (xhr, status, error) {
                 parametros.set('pagina', 'Error');
                 parametros.delete('token');
-                urlActual.search = parametros.toString();
-               // window.location.href = urlActual.toString();
+                url.search = parametros.toString();
+                window.location.href = url.toString();
             }
         });
     }
