@@ -1,9 +1,16 @@
-<h2>Restablecer Contraseña</h2>
-<form method="post" id="restablecerForm">
-  <label for="nueva_contraseña">Nueva Contraseña:</label><br>
-  <input type="password" id="nueva_contrasena" name="nueva_contrasena" required><br><br>
-  
-  <button type="submit" class="btn btn-warning">Restablecer Contraseña</button>
-</form>
+<div class="container">
+  <h1 class="text-center m-5">Restablecer Contraseña</h1>
+</div>
 
-<script src="./JS/Restablecer_contrasena.js"></script>
+
+<section class="text-center p-5 mt-4">
+  <div class="container p-3">
+    <h2>Nueva Contraseña</h2>
+    <form id="restablecerForm" method="Post">
+      <input class="form-control w-3" type="password" placeholder="Ingesa tu Contraseña" id="nueva_contrasena" name="nueva_contrasena" required><br><br>
+      <button type="submit" class="btn btn-warning">Restablecer Contraseña</button>
+    </form>
+  </div>
+</section>
+
+  <script src="./JS/Restablecer_contrasena.js"></script>
