@@ -1,11 +1,11 @@
 <h2>Recuperar Contraseña</h2>
 <form method="post" id="recuperacionForm" class="mb-2">
   <div class="mb-3">
-    <label for="correo">Correo electrónico:</label><br>
-    <input class="form-label mb-2" placeholder="Correo" type="email" id="correo" name="correo" required>
+    <label class="form-label" for="correo">Correo electrónico:</label>
+    <input class="form-control mb-2" placeholder="Ingresa tu correo electrónico" type="email" id="correo" name="correo" required autofocus style="min-width: 15rem;">
   </div>
   <button type="submit" class="btn btn-outline-success">Mandar</button>
-  <a class="link-danger link-underline-danger" type="button" onclick="menu('Registro')">Registrarse</a>
 </form>
+<a class="link-danger link-underline-danger" type="button" onclick="menu('Registro')">Registrarse</a>
 
 <script src="./JS/Recuperacion.js"></script>
