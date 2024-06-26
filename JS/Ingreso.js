@@ -34,8 +34,8 @@ login.addEventListener('submit', function (e) {
           contrasena: contrasena.value
         },
         success: function (response) {
-          
           clearForms(login);
+          menu('Usuario')
         },
         error: function (xhr, status, error) {
           Swal.fire({

@@ -2,10 +2,10 @@ $(document).ready(function () {
   setTimeout(function () {
     $('.pantalla-carga').fadeOut();
   }, 2000);
-  menu("Ingreso");
 
   // Cargar el contenido HTML de un archivo externo
   loadModule();
+  secion();
   getYear();
 
 });
@@ -33,6 +33,19 @@ function getYear() {
   var currentDate = new Date();
   var currentYear = currentDate.getFullYear();
   document.querySelector("#displayYear").innerHTML = currentYear;
+}
+
+function secion() {
+  $.ajax({
+    url: './PHP/Usuario.php',
+    type: 'GET',
+    success: function (response) {
+      menu("Usuario");
+    },
+    error: function (xhr, status, error) {
+      menu("Ingreso");
+    }
+  });
 }
 
 function menu(modulo) {
