@@ -66,6 +66,7 @@ function selectPaymentMethod(method) {
 }
 
 function lamagiadelmodal(){
+  obtenerCarrito();
   var paymentForm = document.getElementById("paymentForm");
   paymentForm.innerHTML="";
 }

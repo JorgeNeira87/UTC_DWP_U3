@@ -230,6 +230,8 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
+          <div id="listCarrito"></div>
+          <p>Total a pagar: $<span id="total"></span></p>
           <div class="btn-group-vertical w-100" role="group">
             <button type="button" class="btn btn-outline-success text-black"
               onclick="selectPaymentMethod('paypal')">PayPal</button> <br>
@@ -263,7 +265,9 @@
   <!-- isotope js -->
   <script src="./JS/isotope.pkgd.min.js"></script>
   <!-- custom js -->
-  <script src="./JS/custom.js"></script>
+<script src="./JS/carrito.js"></script>
+<script src="./JS/custom.js"></script>
+
 </body>
 
 </html>
