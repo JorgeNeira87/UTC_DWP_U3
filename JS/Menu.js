@@ -30,7 +30,16 @@ Promise.all([obtenerProductos()])
     .catch(error => {
         console.error("Ocurrió un error:", error);
     });
-    
+
+      // agregar al carrito desde el modal
+      $('#moproducto').on('shown.bs.modal', function () {
+        $('#agregarAlCarrito').click(function () {
+            var cantidad = parseInt($('#cantidad').val());
+            agregarAlCarrito(productos[currentProductIndex], cantidad);
+            $('#moproducto').modal('hide');
+        });
+    });
+
 async function obtenerProductos() {
     try {
         
@@ -121,11 +130,9 @@ function cargarProductos(arrayProductos) {
 
 function idToModal(Producto) {
     var ProductoId = Producto.id;
-    console.log(ProductoId);
-    console.log(productos);
+    
     for(let i = 0; i < productos.length; i++){
         if(productos[i].ProductoId == ProductoId){
-            console.log(productos[i]);
             var ModalContent = document.getElementById("productoMBody");
             ModalContent.innerHTML = "";
 
@@ -186,8 +193,18 @@ function idToModal(Producto) {
 
             ModalFooter.appendChild(divInput);
 
-            var btnCart = document.createElement("buttom");
+            var btnCart = document.createElement("button");
             btnCart.classList.add("btn", "btn-success");
+            btnCart.textContent = "Añadir al carrito";
+            btnCart.setAttribute("data-bs-dismiss","modal");
+            btnCart.id = "agregarAlCarrito"; //  botón de añadir al carrito
+            btnCart.onclick = function () {
+                agregarAlCarrito(productos[i], InputCantidad.value);
+                $('#moproducto').modal('hide');
+            };
+
+            // var btnCart = document.createElement("buttom");
+            // btnCart.classList.add("btn", "btn-success");
 
             var iCart = document.createElement("i");
             iCart.classList.add("bi", "bi-cart-fill");
@@ -214,4 +231,14 @@ function decrementar() {
         valor--;
         document.getElementById("cantidad").value = valor;
     }
+}
+
+function agregarAlCarrito(producto, cantidad) {
+    let productoEnCarrito = {
+        nombre: producto.Nombre,
+        precio: producto.Precio,
+        cantidad: document.getElementById("cantidad").value
+
+    };
+    agregarProducto(productoEnCarrito);
 }
