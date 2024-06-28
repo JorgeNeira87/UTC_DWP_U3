@@ -53,22 +53,18 @@ function menu(modulo) {
   });
 }
 
-function selectPaymentMethod(method) {
-
-  if (method === 'paypal') {
-    $('#paymentForm').load('./Modulos/Paypal.html', function () {
-    });
-
-  } else if (method === 'credit_card') {
-    $('#paymentForm').load('./Modulos/Credito.html', function () {
-    });
-  }
-}
-
 function lamagiadelmodal(){
+  $.ajax({
+    url: "./Modulos/Carrito.html",
+    success: function(result){
+      $("#modalContainer").html(result);
+      $("#paymentModal").modal('show');
+    },
+    error: function(){
+      alert("Error al cargar el contenido del modal.");
+    }
+  });
   obtenerCarrito();
-  var paymentForm = document.getElementById("paymentForm");
-  paymentForm.innerHTML="";
 }
 
 function clearForms(form) {

@@ -166,7 +166,7 @@
   </div>
 
   <div id="contenido"></div>
-
+  <div id="modalContainer"></div>
   <!-- footer section -->
   <footer class="footer_section">
     <div class="container">
@@ -221,30 +221,6 @@
   </footer>
   <!-- footer section -->
 
-  <!-- Modal de orden -->
-  <div class="modal fade" id="paymentModal" tabindex="-1" aria-labelledby="paymentModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content bg-warning">
-        <div class="modal-header border-bottom-0">
-          <h5 class="modal-title" id="paymentModalLabel">Seleccionar Método de Pago</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <div id="listCarrito"></div>
-          <p>Total a pagar: $<span id="total"></span></p>
-          <div class="btn-group-vertical w-100" role="group">
-            <button type="button" class="btn btn-outline-success text-black"
-              onclick="selectPaymentMethod('paypal')">PayPal</button> <br>
-            <button type="button" class="btn btn-outline-success text-black"
-              onclick="selectPaymentMethod('credit_card')">Tarjeta de Crédito</button>
-          </div>
-          <div id="paymentForm"></div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- Modal de orden -->
-
   <!-- Modal de producto -->
   <div class="modal fade" id="moproducto" tabindex="-1" aria-labelledby="productoModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -265,7 +241,6 @@
   <!-- isotope js -->
   <script src="./JS/isotope.pkgd.min.js"></script>
   <!-- custom js -->
-<script src="./JS/carrito.js"></script>
 <script src="./JS/custom.js"></script>
 
 </body>
