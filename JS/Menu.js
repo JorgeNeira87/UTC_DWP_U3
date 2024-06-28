@@ -70,35 +70,42 @@ function cargarProductos(arrayProductos) {
             divFiltro.classList.add(arrayProductos[i].Tipo, "col-4", "mb-1", "all");
 
             var divCard = document.createElement("div");
-            divCard.classList.add("p-1", "card", "bg-dark", "rounded");
-            divCard.style.minHeight = "80vh";
+            divCard.classList.add("m-3", "card", "bg-dark", "rounded");
+            // divCard.style.minHeight = "50vh";
+
+            var divCardFront = document.createElement("div");
+            divCardFront.classList.add("front");
 
             var img = document.createElement("img");
             img.classList.add("rounded-bottom", "bg-white", "mh-100", "img-fluid");
             img.src = "Imagenes/" + arrayProductos[i].Nombre + ".png";
-            img.style.height = "40vh";
-            divCard.appendChild(img);
+            // img.style.height = "40vh";
+            divCardFront.appendChild(img);
+            
+            divCard.appendChild(divCardFront);
 
-            var divCardBody = document.createElement("div");
-            divCardBody.classList.add("card-body", "position-relative");
+            var divCardBack = document.createElement("div");
+            divCardBack.classList.add("back", "position-relative");
 
             var hNombre = document.createElement("h5");
             hNombre.classList.add("card-title", "text-white");
             hNombre.textContent = arrayProductos[i].Nombre;
-            divCardBody.appendChild(hNombre);
+            divCardBack.appendChild(hNombre);
 
             var pDescripcion = document.createElement("p");
             pDescripcion.classList.add("card-text", "text-white");
             pDescripcion.textContent = arrayProductos[i].Descripcion;
-            divCardBody.appendChild(pDescripcion);
+            divCardBack.appendChild(pDescripcion);
 
             var hPrecio = document.createElement("h6");
             hPrecio.classList.add("card-subtitle", "text-white");
             hPrecio.textContent = "$" + arrayProductos[i].Precio;
-            divCardBody.appendChild(hPrecio);
+            divCardBack.appendChild(hPrecio);
+
+            divCard.appendChild(divCardBack);
 
             var btnCart = document.createElement("buttom");
-            btnCart.classList.add("btn", "btn-warning", "position-absolute", "bottom-0", "end-0");
+            btnCart.classList.add("btn", "btn-warning", "btn-lg", "position-absolute", "bottom-0", "end-0");
             btnCart.id = arrayProductos[i].ProductoId;
             btnCart.setAttribute("data-bs-toggle", "modal");
             btnCart.setAttribute("data-bs-target", "#moproducto");
@@ -111,9 +118,7 @@ function cargarProductos(arrayProductos) {
             iCart.classList.add("bi", "bi-cart-fill");
             btnCart.appendChild(iCart);
 
-            divCardBody.appendChild(btnCart);
-
-            divCard.appendChild(divCardBody);
+            divCard.appendChild(btnCart);
 
             divFiltro.appendChild(divCard);
             div.appendChild(divFiltro);
@@ -197,14 +202,11 @@ function idToModal(Producto) {
             btnCart.classList.add("btn", "btn-success");
             btnCart.textContent = "Añadir al carrito";
             btnCart.setAttribute("data-bs-dismiss","modal");
-            btnCart.id = "agregarAlCarrito"; //  botón de añadir al carrito
+            btnCart.id = "agregarAlCarrito";
             btnCart.onclick = function () {
                 agregarAlCarrito(productos[i], InputCantidad.value);
                 $('#moproducto').modal('hide');
             };
-
-            // var btnCart = document.createElement("buttom");
-            // btnCart.classList.add("btn", "btn-success");
 
             var iCart = document.createElement("i");
             iCart.classList.add("bi", "bi-cart-fill");
@@ -235,9 +237,10 @@ function decrementar() {
 
 function agregarAlCarrito(producto, cantidad) {
     let productoEnCarrito = {
+        id: producto.ProductoId,
         nombre: producto.Nombre,
         precio: producto.Precio,
-        cantidad: document.getElementById("cantidad").value
+        cantidad: cantidad
 
     };
     agregarProducto(productoEnCarrito);
