@@ -17,6 +17,9 @@
 
 .card .front {
     transform: perspective(500px) rotateY(0deg);
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
 }
 
 .card .back {
