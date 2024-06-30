@@ -1,39 +1,49 @@
 var formulario = document.getElementById("dataForm");
-var nombreInput = document.getElementById("nombre");
 var correoInput = document.getElementById("correo");
 var telefonoInput = document.getElementById("telefono");
+var btnActualizar = document.getElementById("btnActualizar");
+var btnGuardar = document.getElementById("btnGuardar");
 
-$.ajax({
-    url: './PHP/Usuario.php',
-    type: 'GET',
-    success: function (response) {
-        console.log(response);
-        var foto = document.getElementById("foto");
-        var genero = document.getElementById("genero");
+function cargarDatosUsuario() {
+    $.ajax({
+        url: './PHP/Usuario.php',
+        type: 'GET',
+        success: function (response) {
+            console.log(response);
+            var foto = document.getElementById("foto");
+            var nombre = document.getElementById("nombre");
+            var correo = document.getElementById("correo");
+            var telefono = document.getElementById("telefono");
+            var genero = document.getElementById("genero");
 
-        if (response.Foto === "") {
-            foto.setAttribute('src', './Imagenes/Porfile.png');
-        } else {
-            foto.setAttribute('src', response.Foto);
+            if (response.Foto === "") {
+                foto.setAttribute('src', './Imagenes/Porfile.png');
+            } else {
+                foto.setAttribute('src', response.Foto);
+            }
+            nombre.value = response.Nombre;
+            nombre.disabled = true;
+            nombre.classList.add("bg-transparent", "border", "border-0");
+            correo.value = response.Correo;
+            correo.disabled = true; // Inicialmente deshabilitado
+            correo.classList.add("bg-transparent", "border", "border-0");
+            telefono.value = response.Telefono ? response.Telefono : 'Teléfono no disponible';
+            telefono.disabled = true; // Inicialmente deshabilitado
+            telefono.classList.add("bg-transparent", "border", "border-0");
+            genero.textContent = response.Genero;
+        },
+        error: function (xhr, status, error) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error en el ingreso',
+                text: 'Por favor, intenta nuevamente.',
+                showConfirmButton: true
+            });
         }
-        nombre.textContent = response.Nombre;
-        nombreInput.classList.add("bg-transparent", "border", "border-0");
-        correoInput.value = response.Correo;
-        correoInput.classList.add("bg-transparent", "border", "border-0");
-        telefonoInput.value = response.Telefono ? response.Telefono : 'Teléfono no disponible';
-        telefonoInput.classList.add("bg-transparent", "border", "border-0");
+    });
+}
 
-        genero.textContent = response.Genero;
-    },
-    error: function (xhr, status, error) {
-        Swal.fire({
-            icon: 'error',
-            title: 'Error en el ingreso',
-            text: 'Por favor, intenta nuevamente.',
-            showConfirmButton: true
-        });
-    }
-});
+cargarDatosUsuario();
 
 telefonoInput.addEventListener("input", function () {
     var valor = this.value.replace(/\D/g, '');
@@ -60,14 +70,22 @@ correoInput.addEventListener("input", function () {
     this.value = emailFormateado;
 });
 
-document.getElementById("actualizarBtn").addEventListener("click", function() {
-    nombreInput.disabled = false;
-    correoInput.disabled = false;
-    telefonoInput.disabled = false;
-    nombreInput.classList.remove("bg-transparent", "border-0");
-    correoInput.classList.remove("bg-transparent", "border-0");
-    telefonoInput.classList.remove("bg-transparent", "border-0");
+btnActualizar.addEventListener('click', function () {
+    Swal.fire({
+        icon: 'info',
+        title: 'Vas a actualizar tus datos',
+        text: 'Ahora puedes editar tu correo y teléfono.',
+        showConfirmButton: true
+    }).then((result) => {
+        if (result.isConfirmed) {
+            correoInput.disabled = false;
+            telefonoInput.disabled = false;
+            btnGuardar.disabled = false;
+            btnActualizar.disabled = true; 
+        }
+    });
 });
+
 
 formulario.addEventListener('submit', function (e) {
     e.preventDefault(); 
@@ -75,51 +93,51 @@ formulario.addEventListener('submit', function (e) {
     if (correoInput.value === "") {
         Swal.fire({
             position: "top-end",
-            title: "Ingrese un correo electronico, por favor.",
+            title: "Ingrese un correo electrónico, por favor.",
             color: "#ffffff",
             background: "#ffbe32",
             showConfirmButton: false,
             timer: 1500
         });
-    } else if (telefonoInput.value === "" || telefonoInput.value.length > 12) {
+    } else if (telefonoInput.value === "" || telefonoInput.value.length !== 12) { 
         Swal.fire({
             position: "top-end",
-            title: "Ingrese un numero telefonico valido, por favor.",
+            title: "Ingrese un número telefónico válido, por favor.",
             color: "#ffffff",
             background: "#ffbe32",
             showConfirmButton: false,
             timer: 1500
         });
     } else {
+        
         $.ajax({
             url: './PHP/Actualizar.php',
             type: 'POST',
             data: {
-                nombre: nombreInput.value,
                 correo: correoInput.value,
                 telefono: telefonoInput.value
             },
             success: function (response) {
                 Swal.fire({
                     icon: 'success',
-                    title: 'Datos actualizados exitosamente',
+                    title: 'Actualización exitosa',
                     showConfirmButton: false,
                     timer: 1500
                 });
 
-                nombreInput.disabled = true;
+                
+                cargarDatosUsuario();
+
+                // Deshabilitar campos y botones nuevamente
                 correoInput.disabled = true;
                 telefonoInput.disabled = true;
-                nombreInput.classList.add("bg-transparent", "border-0");
-                correoInput.classList.add("bg-transparent", "border-0");
-                telefonoInput.classList.add("bg-transparent", "border-0");
-
-                location.reload();
+                btnGuardar.disabled = true;
+                btnActualizar.disabled = false; 
             },
             error: function (xhr, status, error) {
                 Swal.fire({
                     icon: 'error',
-                    title: 'Error en el registro',
+                    title: 'Error en la actualización',
                     text: 'Por favor, intenta nuevamente.',
                     showConfirmButton: true
                 });
@@ -127,21 +145,3 @@ formulario.addEventListener('submit', function (e) {
         });
     }
 });
-
-function cerrar() {
-    $.ajax({
-        url: './PHP/Cerrar.php',
-        type: 'GET',
-        success: function (response) {
-            menu('Ingreso');
-        },
-        error: function (xhr, status, error) {
-            Swal.fire({
-                icon: 'error',
-                title: 'Error al intentar cerrar la sesion',
-                text: 'Por favor, intenta nuevamente.',
-                showConfirmButton: true
-            });
-        }
-    });
-}
