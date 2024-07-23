@@ -2,10 +2,10 @@ $(document).ready(function () {
   setTimeout(function () {
     $('.pantalla-carga').fadeOut();
   }, 2000);
-  menu("Ingreso");
 
   // Cargar el contenido HTML de un archivo externo
   loadModule();
+  secion();
   getYear();
 
 });
@@ -35,26 +35,36 @@ function getYear() {
   document.querySelector("#displayYear").innerHTML = currentYear;
 }
 
+function secion() {
+  $.ajax({
+    url: './PHP/Usuario.php',
+    type: 'GET',
+    success: function (response) {
+      menu("Usuario");
+    },
+    error: function (xhr, status, error) {
+      menu("Ingreso");
+    }
+  });
+}
+
 function menu(modulo) {
   $('#usuarioMenu').load('./Modulos/' + modulo + '.html', function () {
   });
 }
 
-function selectPaymentMethod(method) {
-
-  if (method === 'paypal') {
-    $('#paymentForm').load('./Modulos/Paypal.html', function () {
-    });
-
-  } else if (method === 'credit_card') {
-    $('#paymentForm').load('./Modulos/Credito.html', function () {
-    });
-  }
-}
-
 function lamagiadelmodal(){
-  var paymentForm = document.getElementById("paymentForm");
-  paymentForm.innerHTML="";
+  $.ajax({
+    url: "./Modulos/Carrito.html",
+    success: function(result){
+      $("#modalContainer").html(result);
+      $("#paymentModal").modal('show');
+    },
+    error: function(){
+      alert("Error al cargar el contenido del modal.");
+    }
+  });
+  obtenerCarrito();
 }
 
 function clearForms(form) {
