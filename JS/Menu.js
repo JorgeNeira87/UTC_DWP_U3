@@ -25,7 +25,16 @@ Promise.all([obtenerProductos()])
             masonry: {
                 columnWidth: ".all"
             }
-        })
+        });
+
+        // Evento para agregar al carrito desde la modal
+        $('#moproducto').on('shown.bs.modal', function () {
+            $('#agregarAlCarrito').click(function () {
+                var cantidad = parseInt($('#cantidad').val());
+                agregarAlCarrito(productos[currentProductIndex], cantidad);
+                $('#moproducto').modal('hide');
+            });
+        });
     })
     .catch(error => {
         console.error("Ocurrió un error:", error);
@@ -42,7 +51,6 @@ Promise.all([obtenerProductos()])
 
 async function obtenerProductos() {
     try {
-        
         const response = await $.ajax({
             url: './PHP/Menu.php',
             type: 'GET',
@@ -50,22 +58,20 @@ async function obtenerProductos() {
         });
 
         return response;
-        
     } catch (error) {
         window.location.href = url.toString();
-
         console.error('Error en la solicitud:', error);
         throw error;
     }
 }
+
 function cargarProductos(arrayProductos) {
-    
     try {
         var menu = document.getElementById("menuDiv");
         var div = document.createElement("div");
         div.classList.add("row", "p-b-1");
-        
-    for (let i = 0; i < arrayProductos.length; i++) {
+
+        for (let i = 0; i < arrayProductos.length; i++) {
             var divFiltro = document.createElement("div");
             divFiltro.classList.add(arrayProductos[i].Tipo, "col-4", "mb-1", "all");
 
@@ -101,17 +107,16 @@ function cargarProductos(arrayProductos) {
             hPrecio.classList.add("card-subtitle", "text-white");
             hPrecio.textContent = "$" + arrayProductos[i].Precio;
             divCardBack.appendChild(hPrecio);
-
             divCard.appendChild(divCardBack);
 
             var btnCart = document.createElement("buttom");
             btnCart.classList.add("btn", "btn-warning", "btn-lg", "position-absolute", "bottom-0", "end-0");
+
             btnCart.id = arrayProductos[i].ProductoId;
             btnCart.setAttribute("data-bs-toggle", "modal");
             btnCart.setAttribute("data-bs-target", "#moproducto");
             btnCart.onclick = function () {
                 idToModal(this);
-
             };
 
             var iCart = document.createElement("i");
@@ -127,7 +132,6 @@ function cargarProductos(arrayProductos) {
 
     } catch (error) {
         window.location.href = url.toString();
-
         console.error('Error en la solicitud:', error);
         throw error;
     }
@@ -175,7 +179,7 @@ function idToModal(Producto) {
             var btnDecremento = document.createElement("button");
             btnDecremento.classList.add("btn", "btn-secondary");
             btnDecremento.textContent = "-";
-            btnDecremento.onclick = function() {
+            btnDecremento.onclick = function () {
                 decrementar();
             };
             divInput.appendChild(btnDecremento);
@@ -191,7 +195,7 @@ function idToModal(Producto) {
             var btnIncremento = document.createElement("button");
             btnIncremento.classList.add("btn", "btn-secondary");
             btnIncremento.textContent = "+";
-            btnIncremento.onclick = function() {
+            btnIncremento.onclick = function () {
                 incrementar();
             };
             divInput.appendChild(btnIncremento);
