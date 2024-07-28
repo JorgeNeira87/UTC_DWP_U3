@@ -46,7 +46,7 @@
     <header class="header_section">
       <div class="container">
         <nav class="navbar navbar-expand-lg custom_nav-container ">
-          <a class="navbar-brand" href="?pagina=Principal"><span>Café Café</span></a>
+          <a class="navbar-brand" href=""><span>Café Café</span></a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class=""></span>
@@ -54,6 +54,7 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <!-- Tabs -->
             <ul class="navbar-nav mx-auto">
+              <!-- <li class="nav-item"><a class="nav-link" role="button" onclick="modulo ('Principal')">Principal</a></li> -->
               <li class="nav-item"><a class="nav-link" role="button" href="?pagina=Principal">Principal</a></li>
               <li class="nav-item"><a class="nav-link" href="?pagina=Menu">Menu</a></li>
               <li class="nav-item"><a class="nav-link" role="button" href="?pagina=Pedidos">Pedidos</a></li>
@@ -73,16 +74,18 @@
             <!-- Opciones -->
             <div class="user_option">
               <div class="dropdown">
-                <a href="#" class="user_link dropdown-toggle" role="button" data-bs-toggle="dropdown"
+                <a class="user_link dropdown-toggle" role="button" data-bs-toggle="dropdown"
                   aria-expanded="false">
                   <i class="bi bi-person"></i>
                 </a>
                 <ul class="dropdown-menu px-2" id="usuarioMenu">
+
                 </ul>
               </div>
               <button type="button" class="order_online" data-bs-toggle="modal" data-bs-target="#paymentModal"
                 onclick="lamagiadelmodal()">Ordena online</button>
             </div>
+
           </div>
         </nav>
       </div>
@@ -94,16 +97,37 @@
       <div id="principalCarousel" class="carousel slide">
         <div class="carousel-inner">
           <div class="carousel-item active">
-            <div class="container">
+            <div class="container ">
               <div class="row">
-                <div class="col-md-7 col-lg-6">
+                <div class="col-md-7 col-lg-6 ">
                   <div class="detail-box">
                     <h1>Comida de calidad</h1>
-                    <p>Doloremque, itaque aperiam facilis rerum, commodi, temporibus sapiente ad mollitia laborum quam
-                      quisquam esse error unde. Tempora ex doloremque, labore, sunt repellat dolore, iste magni quos
-                      nihil ducimus libero ipsam.</p>
+                    <font COLOR="white">
+                      <p>Creemos que el café es mucho más que una bebida es una experiencia que conecta personas,
+                        inspira conversaciones y crea momentos inolvidables.</p>
+                    </font>
                     <div class="btn-box">
-                      <a href="" class="btn1">Order Now</a>
+                      <a href="?pagina=Menu" class="btn1">Ordena ahora</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-item ">
+            <div class="container ">
+              <div class="row">
+                <div class="col-md-7 col-lg-6 ">
+                  <div class="detail-box">
+                    <h1>Ambiente reljado</h1>
+                    <font COLOR="white">
+                      <p>En Web Coffee, estamos comprometidos con el medio ambiente. Utilizamos productos
+                        biodegradables.</p>
+                    </font>
+                    <div class="btn-box">
+                      <a href="?pagina=Menu" class="btn1">
+                        Ordena ahora
+                      </a>
                     </div>
                   </div>
                 </div>
@@ -111,33 +135,19 @@
             </div>
           </div>
           <div class="carousel-item">
-            <div class="container">
+            <div class="container ">
               <div class="row">
-                <div class="col-md-7 col-lg-6">
+                <div class="col-md-7 col-lg-6 ">
                   <div class="detail-box">
-                    <h1>Ambiente relajado</h1>
-                    <p>Doloremque, itaque aperiam facilis rerum, commodi, temporibus sapiente ad mollitia laborum quam
-                      quisquam esse error unde. Tempora ex doloremque, labore, sunt repellat dolore, iste magni quos
-                      nihil ducimus libero ipsam.</p>
+                    <h1>Pedidos en linea</h1>
+                    <font COLOR="white">
+                      <p>Estamos abiertos todos los días de 7:00 AM a 10:00 PM. Ven y disfruta de una experiencia de
+                        café incomparable en Web Coffee.</p>
+                    </font>
                     <div class="btn-box">
-                      <a href="" class="btn1">Order Now</a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="carousel-item">
-            <div class="container">
-              <div class="row">
-                <div class="col-md-7 col-lg-6">
-                  <div class="detail-box">
-                    <h1>Pedidos en línea</h1>
-                    <p>Doloremque, itaque aperiam facilis rerum, commodi, temporibus sapiente ad mollitia laborum quam
-                      quisquam esse error unde. Tempora ex doloremque, labore, sunt repellat dolore, iste magni quos
-                      nihil ducimus libero ipsam.</p>
-                    <div class="btn-box">
-                      <a href="" class="btn1">Order Now</a>
+                      <a href="?pagina=Menu" class="btn1">
+                        Ordena ahora
+                      </a>
                     </div>
                   </div>
                 </div>
@@ -159,14 +169,14 @@
   </div>
 
   <div id="contenido"></div>
-  <div id="modalContainer"></div>
+
   <!-- footer section -->
   <footer class="footer_section">
     <div class="container">
       <div class="row">
         <div class="col-md-4 footer-col">
           <div class="footer_contact">
-            <h4>Contáctanos</h4>
+            <h4>Contactanos</h4>
             <div class="contact_link_box">
               <a href="">
                 <i class="bi bi-geo-alt-fill"></i>
@@ -186,13 +196,13 @@
         <div class="col-md-4 footer-col">
           <div class="footer_detail">
             <a href="" class="footer-logo">Café Café</a>
-            <p>Enfocados en tu satisfacción y comodidad</p>
+            <p>Enfocados en tu satisfaccion y comodidad</p>
             <div class="footer_social">
-              <a href=""><i class="bi bi-facebook"></i></a>
-              <a href=""><i class="bi bi-twitter"></i></a>
-              <a href=""><i class="bi bi-linkedin"></i></a>
-              <a href=""><i class="bi bi-instagram"></i></a>
-              <a href=""><i class="bi bi-pinterest"></i></i></a>
+              <a ><i class="bi bi-facebook"></i></a>
+              <a ><i class="bi bi-twitter-x"></i></a>
+              <a ><i class="bi bi-linkedin"></i></a>
+              <a ><i class="bi bi-instagram"></i></a>
+              <a ><i class="bi bi-pinterest"></i></i></a>
             </div>
           </div>
         </div>
@@ -205,14 +215,36 @@
       <div class="footer-info">
         <p>
           &copy; <span id="displayYear"></span> All Rights Reserved By
-          <a href="https://html.design/">Free Html Templates</a><br><br>
+          <a >Free Html Templates</a><br><br>
           &copy; <span id="displayYear"></span> Distributed By
-          <a href="https://themewagon.com/" target="_blank">ThemeWagon</a>
+          <a target="_blank">ThemeWagon</a>
         </p>
       </div>
     </div>
   </footer>
   <!-- footer section -->
+
+  <!-- Modal de orden -->
+  <div class="modal fade" id="paymentModal" tabindex="-1" aria-labelledby="paymentModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content bg-warning">
+        <div class="modal-header border-bottom-0">
+          <h5 class="modal-title" id="paymentModalLabel">Seleccionar Método de Pago</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="btn-group-vertical w-100" role="group">
+            <button type="button" class="btn btn-outline-success text-black"
+              onclick="selectPaymentMethod('paypal')">PayPal</button> <br>
+            <button type="button" class="btn btn-outline-success text-black"
+              onclick="selectPaymentMethod('credit_card')">Tarjeta de Crédito</button>
+          </div>
+          <div id="paymentForm"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Modal de orden -->
 
   <!-- Modal de producto -->
   <div class="modal fade" id="moproducto" tabindex="-1" aria-labelledby="productoModalLabel" aria-hidden="true">
@@ -220,6 +252,7 @@
       <div class="modal-content bg-warning" id="productoMBody"></div>
     </div>
   </div>
+  <!-- Modal de producto -->
 
   <!-- jQery -->
   <script src="./JS/jquery.min.js"></script>
@@ -233,9 +266,7 @@
   <!-- isotope js -->
   <script src="./JS/isotope.pkgd.min.js"></script>
   <!-- custom js -->
-<script src="./JS/custom.js"></script>
-
-
+  <script src="./JS/custom.js"></script>
 </body>
 
 </html>
