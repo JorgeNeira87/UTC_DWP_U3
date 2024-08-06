@@ -8,7 +8,7 @@ $genero = $_POST['genero'];
 $contrasena = $_POST['contrasena'];
 
 try {
-    $ingreso = $conexion->prepare("INSERT INTO usuarios(Nombre, Correo, Telefono, Genero, Contrasena) VALUES (:usuario, :correo, :telefono, :genero, :contrasena)");
+    $ingreso = $conexion->prepare("INSERT INTO usuarios(Nombre, Correo, Telefono, Genero, Contrasena, rol) VALUES (:usuario, :correo, :telefono, :genero, :contrasena, 1)");
     $ingreso->bindParam(':usuario', $usuario);
     $ingreso->bindParam(':correo', $correo);
     $ingreso->bindParam(':telefono', $telefono);
