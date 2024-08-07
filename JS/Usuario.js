@@ -9,7 +9,6 @@ function cargarDatosUsuario() {
         url: './PHP/Usuario.php',
         type: 'GET',
         success: function (response) {
-            console.log(response);
             var foto = document.getElementById("foto");
             var nombre = document.getElementById("nombre");
             var correo = document.getElementById("correo");
@@ -36,6 +35,24 @@ function cargarDatosUsuario() {
             Swal.fire({
                 icon: 'error',
                 title: 'Error en el ingreso',
+                text: 'Por favor, intenta nuevamente.',
+                showConfirmButton: true
+            });
+        }
+    });
+}
+
+function cerrar() {
+    $.ajax({
+        url: './PHP/Cerrar.php',
+        type: 'POST',
+        success: function (response) {
+            menu('Ingreso');
+        },
+        error: function (xhr, status, error) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error en cerrar la secion',
                 text: 'Por favor, intenta nuevamente.',
                 showConfirmButton: true
             });

@@ -2,7 +2,6 @@ var login = document.getElementById("loginForm");
 
 login.addEventListener('submit', function (e) {
   e.preventDefault();
-  console.log("entro")
 
   var usuario = document.getElementById("usuario");
   var contrasena = document.getElementById("contrasena");
@@ -35,10 +34,7 @@ login.addEventListener('submit', function (e) {
       },
       success: function (response) {
         clearForms(login);
-        console.log('entro al sucess');
-        console.log(response);
         if (parseInt(response) === 1) { //admin
-          console.log('entro a la condicion');
           // Obtener la URL actual
           var urlActual = new URL(window.location.href);
 
@@ -53,7 +49,7 @@ login.addEventListener('submit', function (e) {
           Administrador();
           
         }
-        else if (response === 2) { //user
+        else if (parseInt(response) === 2) { //user
           menu('Usuario')
         }
 
