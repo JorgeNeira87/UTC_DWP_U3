@@ -53,21 +53,21 @@
           </button>
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <!-- Tabs -->
-            <ul class="navbar-nav mx-auto">
+            <ul id="navegacion_menu" class="navbar-nav mx-auto">
               <!-- <li class="nav-item"><a class="nav-link" role="button" onclick="modulo ('Principal')">Principal</a></li> -->
-              <li class="nav-item"><a class="nav-link" role="button" href="?pagina=Principal">Principal</a></li>
-              <li class="nav-item"><a class="nav-link" href="?pagina=Menu">Menu</a></li>
-              <li class="nav-item"><a class="nav-link" role="button" href="?pagina=Pedidos">Pedidos</a></li>
+              <li class="nav-item"><a class="nav-link" role="button" onclick="ParametrosUrl('Pricipal')">Principal</a></li>
+              <li class="nav-item"><a class="nav-link" onclick="ParametrosUrl('Menu')">Menu</a></li>
+              <li class="nav-item"><a class="nav-link" role="button" onclick="ParametrosUrl('Pedidos')">Pedidos</a></li>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
                   aria-expanded="false">
                   Más
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <li><a class="dropdown-item" href="?pagina=Conocenos">Conócenos</a></li>
-                  <li><a class="dropdown-item" href="?pagina=Buzon">Buzón</a></li>
-                  <li><a class="dropdown-item" href="?pagina=Ayuda">Ayuda</a></li>
-                  <li><a class="dropdown-item" href="?pagina=Contactanos">Contáctanos</a></li>
+                  <li><a class="dropdown-item" onclick="ParametrosUrl('Conocenos')">Conócenos</a></li>
+                  <li><a class="dropdown-item" onclick="ParametrosUrl('Buzon')">Buzón</a></li>
+                  <li><a class="dropdown-item" onclick="ParametrosUrl('Ayuda')">Ayuda</a></li>
+                  <li><a class="dropdown-item" onclick="ParametrosUrl('Contactanos')">Contáctanos</a></li>
                 </ul>
               </li>
             </ul>

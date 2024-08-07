@@ -6,7 +6,7 @@ $usuario = $_POST['usuario'];
 $contrasena = $_POST['contrasena'];
 
 try {
-    $ingreso = $conexion->prepare("SELECT UsuarioId, Nombre, Foto, Correo, Telefono, Genero, Contrasena FROM usuarios WHERE Nombre = :usuario AND Contrasena = :contrasena");
+    $ingreso = $conexion->prepare("SELECT UsuarioId, Nombre, Foto, Correo, Telefono, Genero, Contrasena, rol FROM usuarios WHERE Nombre = :usuario AND Contrasena = :contrasena");
     $ingreso->bindParam(':usuario', $usuario);
     $ingreso->bindParam(':contrasena', $contrasena);
     $ingreso->execute();
@@ -21,8 +21,11 @@ try {
             $_SESSION['Telefono']   = $fila['Telefono'];
             $_SESSION['Genero']     = $fila['Genero'];
             $_SESSION['Contrasena'] = $fila['Contrasena'];
+            $_SESSION['Rol']        = $fila['rol'];
+               
+        echo($fila['rol']);
+
         }
-        echo($_SESSION['ID']);
     } else {
         echo("false");
     }
