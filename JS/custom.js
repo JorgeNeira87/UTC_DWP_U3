@@ -173,7 +173,7 @@ function Administrador() {
   var a_pedidos = document.createElement('a');
   a_pedidos.className = 'nav-link';
   a_pedidos.setAttribute('role', 'button');
-  a_pedidos.onclick = function () { ParametrosUrl(valor, 'Pedidos'); };
+  a_pedidos.onclick = function () { ParametrosUrl(valor, 'PedidosA'); };
   a_pedidos.textContent = 'Pedidos';
   li_pedidos.appendChild(a_pedidos);
   menu_navegacion.appendChild(li_pedidos);

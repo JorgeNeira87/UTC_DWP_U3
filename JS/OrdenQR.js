@@ -8,7 +8,6 @@ var params = new URLSearchParams(url.search);
 // Obtener el valor de la variable "variable"
 var variableValor = params.get('mesa');
 
-console.log(variableValor); // Esto imprimirá "ejemplo" en la consola
 
 Promise.all([obtenerProductos()])
     .then(valores => {
@@ -121,11 +120,8 @@ function cargarProductos(noesmenu) {
 }
 function idToModal(Producto) {
     var ProductoId = Producto.id;
-    console.log(ProductoId);
-    console.log(productos);
     for(let i = 0; i < productos.length; i++){
         if(productos[i].ProductoId == ProductoId){
-            console.log(productos[i]);
             var ModalContent = document.getElementById("productoMBody");
             ModalContent.innerHTML = "";
 

@@ -105,7 +105,6 @@ function restaurar(array) {
                 showConfirmButton: false,
                 timer: 1500
             });
-            console.log(response)
             menu('Ingreso')
         },
         error: function(xhr, status, error) {

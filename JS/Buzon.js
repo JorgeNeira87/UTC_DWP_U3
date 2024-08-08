@@ -2,7 +2,6 @@ var buzon = document.getElementById("buzonForm");
 
 buzon.addEventListener('submit', function (e) {
     e.preventDefault();
-    console.log("entro")
 
     var sugerenciaInput = document.getElementById("sugerencia");
 

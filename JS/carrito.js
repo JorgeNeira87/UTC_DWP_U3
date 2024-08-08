@@ -6,7 +6,6 @@ function agregarProducto(producto) {
     producto.precio = parseFloat(produtoTotal);
     arrayCarrito.push(producto);
     total += parseFloat(producto.precio);
-    console.log(total)
     actualizarCarrito();
 }
 
@@ -19,7 +18,6 @@ function actualizarCarrito() {
             total: total
         },
         success: function (response) {
-            console.log(response);
         },
         error: function (xhr, status, error) {
             Swal.fire({
@@ -37,7 +35,6 @@ function obtenerCarrito() {
         url: './PHP/Carrito.php',
         type: 'GET',
         success: function (response) {
-            console.log(response)
             if (response.carrito === null) {
                 let carritoHTML = `<p>Tu carrito esta vacio</p>`
                 document.getElementById("listCarrito").innerHTML = carritoHTML;
@@ -74,7 +71,6 @@ function obtenerCarrito() {
 }
 
 function pedir() {
-    console.log(arrayCarrito)
     if (arrayCarrito.length > 0 && total > 0) {
         $.ajax({
             url: './PHP/Pedido.php',
@@ -84,7 +80,6 @@ function pedir() {
                 total: total
             },
             success: function(response) {
-                console.log(response);
                 if (response === "usuario") {
                     Swal.fire({
                         icon: 'error',
