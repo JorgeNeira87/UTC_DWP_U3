@@ -9,6 +9,7 @@
         echo json_encode($datos);
     } else {
         http_response_code(401);
-        echo json_encode(array("error" => "No hay sesión válida"));
+        // echo json_encode(array("error" => "No hay sesión válida"));
+        echo json_encode(array("error" => $_SESSION['usuarios']));
     }
 ?>
