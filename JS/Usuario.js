@@ -5,11 +5,16 @@ var btnActualizar = document.getElementById("btnActualizar");
 var btnGuardar = document.getElementById("btnGuardar");
 
 function cargarDatosUsuario() {
+    var urlActual = window.location.href;
+    var parametros = new URLSearchParams(new URL(urlActual).search);
+    var valor = parametros.get('User');
     $.ajax({
         url: './PHP/Usuario.php',
-        type: 'GET',
+        type: 'POST',
+        data: {
+          usuarioID: valor
+        },
         success: function (response) {
-            console.log(response);
             var foto = document.getElementById("foto");
             var nombre = document.getElementById("nombre");
             var correo = document.getElementById("correo");
@@ -36,6 +41,24 @@ function cargarDatosUsuario() {
             Swal.fire({
                 icon: 'error',
                 title: 'Error en el ingreso',
+                text: 'Por favor, intenta nuevamente.',
+                showConfirmButton: true
+            });
+        }
+    });
+}
+
+function cerrar() {
+    $.ajax({
+        url: './PHP/Cerrar.php',
+        type: 'POST',
+        success: function (response) {
+            menu('Ingreso');
+        },
+        error: function (xhr, status, error) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error en cerrar la secion',
                 text: 'Por favor, intenta nuevamente.',
                 showConfirmButton: true
             });
@@ -81,14 +104,14 @@ btnActualizar.addEventListener('click', function () {
             correoInput.disabled = false;
             telefonoInput.disabled = false;
             btnGuardar.disabled = false;
-            btnActualizar.disabled = true; 
+            btnActualizar.disabled = true;
         }
     });
 });
 
 
 formulario.addEventListener('submit', function (e) {
-    e.preventDefault(); 
+    e.preventDefault();
 
     if (correoInput.value === "") {
         Swal.fire({
@@ -99,7 +122,7 @@ formulario.addEventListener('submit', function (e) {
             showConfirmButton: false,
             timer: 1500
         });
-    } else if (telefonoInput.value === "" || telefonoInput.value.length !== 12) { 
+    } else if (telefonoInput.value === "" || telefonoInput.value.length !== 12) {
         Swal.fire({
             position: "top-end",
             title: "Ingrese un número telefónico válido, por favor.",
@@ -109,7 +132,7 @@ formulario.addEventListener('submit', function (e) {
             timer: 1500
         });
     } else {
-        
+
         $.ajax({
             url: './PHP/Actualizar.php',
             type: 'POST',
@@ -125,14 +148,14 @@ formulario.addEventListener('submit', function (e) {
                     timer: 1500
                 });
 
-                
+
                 cargarDatosUsuario();
 
                 // Deshabilitar campos y botones nuevamente
                 correoInput.disabled = true;
                 telefonoInput.disabled = true;
                 btnGuardar.disabled = true;
-                btnActualizar.disabled = false; 
+                btnActualizar.disabled = false;
             },
             error: function (xhr, status, error) {
                 Swal.fire({

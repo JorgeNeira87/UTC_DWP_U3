@@ -871,10 +871,9 @@ a:focus {
 
 .dropdown-menu {
   background-color: #ffbe33;
+  min-width: 20vw;
 }
 .dropdown-menu form input[type="text"],
 .dropdown-menu form input[type="password"] {
-  min-width: 40vh;
-  font-family:'Dancing Script',cursive;
-  font-size: 25px;
+  min-width: 15vw;
 }

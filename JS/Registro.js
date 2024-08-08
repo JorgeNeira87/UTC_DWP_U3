@@ -115,7 +115,7 @@ registro.addEventListener('submit', function(e) {
             data: {
                 usuario: usuarioInput.value,
                 correo: correoInput.value,
-                telefono: telefonoInput.value,
+                telefono: "52-" + telefonoInput.value,
                 genero: genero,
                 contrasena: contrasenaInput.value
             },

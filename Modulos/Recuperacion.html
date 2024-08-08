@@ -1,11 +1,28 @@
 <h2>Recuperar </h2>
 <form method="post" id="recuperacionForm" class="mb-2">
+  <input type="hidden" name="type" id="type">
+  
   <div class="mb-3">
-    <label class="form-label" for="correo">Correo electrónico:</label>
-    <input class="form-control mb-2" placeholder="Ingresa tu correo electrónico" type="email" id="correo" name="correo" required autofocus style="min-width: 15rem;">
+    <label class="form-label">Elige una opción:</label><br>
+    <input type="checkbox" id="telefonoCheckbox" name="opcion" value="telefono" onclick="seleccionarOpcion('telefono')">
+    <label for="telefonoCheckbox">Whastapp</label><br>
+    <input type="checkbox" id="correoCheckbox" name="opcion" value="correo" onclick="seleccionarOpcion('correo')">
+    <label for="correoCheckbox">Correo Electrónico</label>
   </div>
+  
+  <div class="mb-3" id="whatsappDiv" style="display: none;">
+    <label class="form-label" for="numero">Número de Teléfono:</label>
+    <input class="form-control mb-2" placeholder="Ingresa tu número de teléfono" type="tel" id="numero" name="numero" style="min-width: 15rem;">
+  </div>
+
+  <div class="mb-3" id="correoDiv" style="display: none;">
+    <label class="form-label" for="correo">Correo Electrónico:</label>
+    <input class="form-control mb-2" placeholder="Ingresa tu correo electrónico" type="email" id="correo" name="correo" style="min-width: 15rem;">
+  </div>
+  
   <button type="submit" class="btn btn-outline-success">Mandar</button>
 </form>
-<a class="link-danger link-underline-danger" type="button" onclick="menu('Registro')">Registrarse</a>
 
+<a class="link-danger link-underline-danger" type="button" onclick="menu('Registro')">Registrarse</a>
 <script src="./JS/Recuperacion.js"></script>
+
