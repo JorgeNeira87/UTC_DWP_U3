@@ -17,13 +17,13 @@ try {
 
         foreach ($datos as $fila) {
             $_SESSION['usuarios'][$fila['UsuarioId']] = array(
-                'ID'            => $fila['UsuarioId']
-                'Nombre'        => $fila['Nombre']
-                'Foto'          => $fila['Foto']
-                'Correo'        => $fila['Correo']
-                'Telefono'      => $fila['Telefono']
-                'Genero'        => $fila['Genero']
-                'Contrasena'    => $fila['Contrasena']
+                'ID'            => $fila['UsuarioId'],
+                'Nombre'        => $fila['Nombre'],
+                'Foto'          => $fila['Foto'],
+                'Correo'        => $fila['Correo'],
+                'Telefono'      => $fila['Telefono'],
+                'Genero'        => $fila['Genero'],
+                'Contrasena'    => $fila['Contrasena'],
                 'Rol'           => $fila['rol']
             );
             header('Content-Type: application/json');

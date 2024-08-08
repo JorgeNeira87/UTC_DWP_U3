@@ -53,7 +53,11 @@ function cerrar() {
         url: './PHP/Cerrar.php',
         type: 'POST',
         success: function (response) {
+            var urlActual = new URL(window.location.href);
+            var params = urlActual.searchParams;
+            params.delete('User');
             menu('Ingreso');
+            window.location.href = urlActual.toString();
         },
         error: function (xhr, status, error) {
             Swal.fire({

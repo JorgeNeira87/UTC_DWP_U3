@@ -127,6 +127,10 @@ class ModuleLoader {
 }
 
 function Administrador() {
+  var urlActual = window.location.href;
+  var parametros = new URLSearchParams(new URL(urlActual).search);
+  var valor = parametros.get('User');
+
   var menu_navegacion = document.getElementById('navegacion_menu');
   menu_navegacion.innerHTML = '';
   var li_principal = document.createElement('li');
@@ -134,7 +138,7 @@ function Administrador() {
   var a_principal = document.createElement('a');
   a_principal.className = 'nav-link';
   a_principal.setAttribute('role', 'button');
-  a_principal.onclick = function () { ParametrosUrl('Principal'); };
+  a_principal.onclick = function () { ParametrosUrl(valor, 'Principal'); };
   a_principal.textContent = 'Principal';
   li_principal.appendChild(a_principal);
   menu_navegacion.appendChild(li_principal);
@@ -145,7 +149,7 @@ function Administrador() {
   var a_productos = document.createElement('a');
   a_productos.className = 'nav-link';
   a_productos.setAttribute('role', 'button');
-  a_productos.onclick = function () { ParametrosUrl('Productos'); };
+  a_productos.onclick = function () { ParametrosUrl(valor, 'Productos'); };
   a_productos.textContent = 'Productos';
   li_productos.appendChild(a_productos);
   menu_navegacion.appendChild(li_productos);
@@ -157,7 +161,7 @@ function Administrador() {
   a_usuarios.className = 'nav-link';
   a_usuarios.setAttribute('role', 'button');
   a_usuarios.onclick = function () {
-    ParametrosUrl('Usuarios');
+    ParametrosUrl(valor, 'Usuarios');
   };
   a_usuarios.textContent = 'Usuarios';
   li_usuarios.appendChild(a_usuarios);
@@ -169,7 +173,7 @@ function Administrador() {
   var a_pedidos = document.createElement('a');
   a_pedidos.className = 'nav-link';
   a_pedidos.setAttribute('role', 'button');
-  a_pedidos.onclick = function () { ParametrosUrl('Pedidos'); };
+  a_pedidos.onclick = function () { ParametrosUrl(valor, 'Pedidos'); };
   a_pedidos.textContent = 'Pedidos';
   li_pedidos.appendChild(a_pedidos);
   menu_navegacion.appendChild(li_pedidos);

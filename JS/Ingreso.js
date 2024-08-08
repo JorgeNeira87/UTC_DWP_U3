@@ -34,12 +34,13 @@ login.addEventListener('submit', function (e) {
       },
       success: function (response) {
         clearForms(login);
+        console.log(response)
         if (parseInt(response.Rol) === 1) { //admin
           ParametrosUrl(response.ID, response.Rol);
+          menu('Usuario');
           Administrador();
         }
         else if (parseInt(response.Rol) === 2) { //user
-          console.log('Entro al rol de usuario')
           ParametrosUrl(response.ID, response.Rol);
           menu('Usuario');
         }
