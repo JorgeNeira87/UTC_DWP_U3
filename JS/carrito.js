@@ -1,47 +1,133 @@
-let carrito = [];
-let total = 0;
+let arrayCarrito = [];
+let total = 0.00;
 
 function agregarProducto(producto) {
-  carrito.push(producto);
-  total+=parseFloat(producto.precio);
-  actualizarCarrito();
+    let produtoTotal = producto.cantidad * parseFloat(producto.precio);
+    producto.precio = parseFloat(produtoTotal);
+    arrayCarrito.push(producto);
+    total += parseFloat(producto.precio);
+    console.log(total)
+    actualizarCarrito();
 }
 
 function actualizarCarrito() {
-  let carritoHTML = "";
+    $.ajax({
+        url: './PHP/Carrito.php',
+        type: 'POST',
+        data: {
+            carrito: arrayCarrito,
+            total: total
+        },
+        success: function (response) {
+            console.log(response);
+        },
+        error: function (xhr, status, error) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error en el registro',
+                text: 'Por favor, intenta nuevamente.',
+                showConfirmButton: true
+            });
+        }
+    });
+}
+
+function obtenerCarrito() {
+    $.ajax({
+        url: './PHP/Carrito.php',
+        type: 'GET',
+        success: function (response) {
+            console.log(response)
+            if (response.carrito === null) {
+                let carritoHTML = `<p>Tu carrito esta vacio</p>`
+                document.getElementById("listCarrito").innerHTML = carritoHTML;
+                document.getElementById("total").innerText = "0.00";
+            } else {
+                arrayCarrito = response.carrito;
+                total =response.total;
+                let carritoHTML = `<table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Producto</th>
+                            <th scope="col">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>`;
+                response.carrito.forEach(producto => {
+                    carritoHTML += `<tr>
+                            <th scope="row">${producto.cantidad}</th>
+                            <td>${producto.nombre}</td>
+                            <td>$${producto.precio}</td>
+                        </tr>`;
+                });
+                carritoHTML += `</tbody>
+                    </table>`
+                document.getElementById("listCarrito").innerHTML = carritoHTML;
+                document.getElementById("total").innerText = response.total;
+            }
+        },
+        error: function (xhr, status, error) {
+            // Error
+        }
+    });
+}
+
+function pedir() {
+    console.log(arrayCarrito)
+    if (arrayCarrito.length > 0 && total > 0) {
+        $.ajax({
+            url: './PHP/Pedido.php',
+            type: 'POST',
+            data: {
+                carrito: arrayCarrito,
+                total: total
+            },
+            success: function(response) {
+                console.log(response);
+                if (response === "usuario") {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Ups!!',
+                        text: 'Por favor, inicie secion.',
+                        showConfirmButton: true
+                    });
+                } else {
+                    let carritoHTML = `<p>Tu carrito esta vacio</p>`
+                    document.getElementById("listCarrito").innerHTML = carritoHTML;
+                    document.getElementById("total").innerText = "0.00";
+                    arrayCarrito = [];
+                    total = 0.00;
+                }
+            },
+            error: function(xhr, status, error) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error en el registro',
+                    text: 'Por favor, intenta nuevamente.',
+                    showConfirmButton: true
+                });
+            }
+        });
+    }
+}
+
+function pagar() {
+    var btnMetodoPaypal = document.getElementById("paypal");
+    var btnMetodoCredirCard = document.getElementById("credit_card");
+    
+    btnMetodoPaypal.classList.remove("visually-hidden")
+    btnMetodoCredirCard.classList.remove("visually-hidden")
+}
+
+function selectPaymentMethod(method) {
+
+    if (method === 'paypal') {
+      $('#paymentForm').load('./Modulos/Paypal.html', function () {
+      });
   
-
-  carrito.forEach(producto => {
-    carritoHTML += `<p>${producto.nombre} - $${producto.precio}</p>`;
-  });
-console.log(total);
-  document.getElementById("carrito").innerHTML = carritoHTML;
-  document.getElementById("total").innerText = total;
-}
-
-// Añadimos el evento para el botón de pago
-function mostrarOpcionesDePago() {
-  let opcionesPagoHTML = `
-    <h3>Total a pagar: $<span id="total">${total}</span></h3>
-    <label for="metodoPago">Seleccione un método de pago:</label>
-    <select id="metodoPago">
-      <option value="tarjeta">Tarjeta de crédito/débito</option>
-      <option value="paypal">PayPal</option>
-      <option value="transferencia">Transferencia bancaria</option>
-    </select>
-    <button onclick="realizarPago()">Pagar</button>
-  `;
-  document.getElementById("opcionesPago").innerHTML = opcionesPagoHTML;
-}
-
-function realizarPago() {
-  let metodoPago = document.getElementById("metodoPago").value;
-  alert(`Ha seleccionado ${metodoPago} como método de pago. Gracias por su compra!`);
-  // Aquí puedes añadir lógica adicional para procesar el pago
-}
-
-document.addEventListener("DOMContentLoaded", () => {
-  actualizarCarrito();
-  mostrarOpcionesDePago();
-});
-
+    } else if (method === 'credit_card') {
+      $('#paymentForm').load('./Modulos/Credito.html', function () {
+      });
+    }
+  }
