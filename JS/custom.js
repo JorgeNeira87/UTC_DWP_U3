@@ -15,14 +15,16 @@ $(document).ready(function () {
   getYear();
 
 });
-function ParametrosUrl(Name) {
+function ParametrosUrl(UserID, Name) {
   var urlActual = new URL(window.location.href);
 
   var params = urlActual.searchParams;
+  params.set('User', UserID);
   if (Name === "1") {
     params.set('Administrador', 'true');
-  }
-  else {
+  } else if (Name === "2") {
+    params.set('pagina', 'Principal');
+  } else {
     params.set('pagina', Name);
   }
   window.location.href = urlActual.toString();
@@ -54,9 +56,15 @@ function getYear() {
 }
 
 function secion() {
+  var urlActual = window.location.href;
+  var parametros = new URLSearchParams(new URL(urlActual).search);
+  var valor = parametros.get('User');
   $.ajax({
     url: './PHP/Usuario.php',
-    type: 'GET',
+    type: 'POST',
+    data: {
+      usuarioID: valor
+    },
     success: function (response) {
       menu("Usuario");
     },

@@ -1,8 +1,8 @@
 <?php
 session_start();
-$usuarios = $_POST['usuariosID'];
+$usuarios = $_POST['usuarioID'];
 
-if (isset($_SESSION['usuario'][$usuarios]) ){
+if (isset($_SESSION['usuarios'][$usuarios]) ){
  $datos = $_SESSION['usuarios'][$usuario];
 
 
